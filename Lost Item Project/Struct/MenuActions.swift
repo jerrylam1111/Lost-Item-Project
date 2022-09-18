@@ -18,6 +18,7 @@ struct Action {
     
     static func allActions() -> [Action] {
         return [
+        Action(name: "Home", image: UIImage(systemName: "house")),
         Action(name: "My Tickets", image: UIImage(systemName: "ticket")),
         Action(name: "Messages", image: UIImage(systemName: "message.badge")),
         Action(name: "Options", image: UIImage(systemName: "option")),
@@ -25,4 +26,8 @@ struct Action {
         Action(name: "Account", image: UIImage(systemName: "person.circle"))
         ]
         }
+    
+    static func logoutAction() -> [Action] {
+        return [Action(name: "Logout", image: UIImage(systemName: "signpost.left"))]
+    }
 }

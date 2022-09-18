@@ -73,6 +73,8 @@ extension ContainerViewController: HomeViewControllerDelegate{
         if let vc = UIStoryboard.sideViewController() {
             addChildSideViewController(vc)
             sideViewController = vc
+            vc.delegate = self
+            vc.profilePicXPos.constant = (vc.view.frame.width - centerPanelExpandedOffset - vc.profilePicWidth.constant) / 2 
         }
     }
     
@@ -125,6 +127,53 @@ extension ContainerViewController: HomeViewControllerDelegate{
       } else {
           homeNavigationController.view.layer.shadowOpacity = 0.0
       }
+    }
+}
+
+extension ContainerViewController:sideViewControllerDelegate {
+    
+    func menuBtnPressed(vc:UIViewController, hidden:Bool) {
+        homeViewController.add(asChildViewController: vc)
+        homeViewController.segmentedControl.selectedSegmentIndex = 0
+        homeViewController.segmentedControl.isHidden = hidden
+        toggleSideView()
+    }
+    
+    func homeBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        menuBtnPressed(vc: vc, hidden: false)
+    }
+    
+    func myTicketsBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MyTicketsViewController") as! MyTicketsViewController
+        menuBtnPressed(vc: vc, hidden: true)
+    }
+    
+    func messagesBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MessagesViewController") as! MessagesViewController
+        menuBtnPressed(vc: vc, hidden: true)
+    }
+    
+    func optionsBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OptionsViewController") as! OptionsViewController
+        menuBtnPressed(vc: vc, hidden: true)
+    }
+    
+    func settingsBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        menuBtnPressed(vc: vc, hidden: true)
+    }
+    
+    func accountBtnPressed() {
+        let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+        menuBtnPressed(vc: vc, hidden: true)
+    }
+    
+    func logoutBtnPressed() {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let loginViewController = storyboard .instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        loginViewController.modalPresentationStyle = .fullScreen
+        self.present(loginViewController, animated: true, completion: nil)
     }
 }
 

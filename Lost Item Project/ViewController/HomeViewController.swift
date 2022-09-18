@@ -59,7 +59,7 @@ class HomeViewController: UIViewController {
     }()
     
     // add a subview from another View Controller
-    private func add(asChildViewController vc: UIViewController) {
+    func add(asChildViewController vc: UIViewController) {
         addChild(vc)
         view.addSubview(vc.view)
         vc.view.frame = view.bounds
